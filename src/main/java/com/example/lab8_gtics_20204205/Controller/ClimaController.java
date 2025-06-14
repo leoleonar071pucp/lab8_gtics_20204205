@@ -1,6 +1,7 @@
 package com.example.lab8_gtics_20204205.Controller;
 
 import com.example.lab8_gtics_20204205.Entity.MonitoreoClimatico;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import  com.example.lab8_gtics_20204205.repository.MonitoreoClimaticoRepository;
@@ -31,8 +32,8 @@ public class ClimaController {
 
         if (response.getStatusCode().is2xxSuccessful()) {
             JsonNode data = response.getBody();
-            Map<String, Object> resultado = Map.of(
-                    "temperatura", data.at("/current/temp_c").asDouble(),
+            Map resultado = Map.of(
+                    "temperature", data.at("/current/temp_c").asDouble(),
                     "condicion", data.at("/current/condition/text").asText(),
                     "sensacion", data.at("/current/feelslike_c").asDouble(),
                     "humedad", data.at("/current/humidity").asInt()
