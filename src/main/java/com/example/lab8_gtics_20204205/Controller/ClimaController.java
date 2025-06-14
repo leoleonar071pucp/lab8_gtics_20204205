@@ -1,10 +1,17 @@
 package com.example.lab8_gtics_20204205.Controller;
 
+import com.example.lab8_gtics_20204205.Entity.MonitoreoClimatico;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import  com.example.lab8_gtics_20204205.repository.MonitoreoClimaticoRepository;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.catalina.Store;
+import org.hibernate.mapping.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api/clima")
@@ -60,6 +67,7 @@ public class ClimaController {
 
     @PostMapping("/monitoreo")
     public ResponseEntity<?> registrarMonitoreo(@RequestBody MonitoreoClimatico monitoreo) {
+        Store repository = null;
         repository.save(monitoreo);
         return ResponseEntity.ok("Monitoreo guardado");
     }

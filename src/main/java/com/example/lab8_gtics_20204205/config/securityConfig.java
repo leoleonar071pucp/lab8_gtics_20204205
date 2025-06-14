@@ -1,3 +1,5 @@
+package com.example.lab8_gtics_20204205.config;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,9 +19,8 @@ public class securityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeHttpRequests()
-                .anyRequest().authenticated()
+        http.csrf(csrf -> csrf.disable())
+                .anyrequest().authenticated()
                 .and()
                 .httpBasic();
         return http.build();
@@ -28,17 +29,10 @@ public class securityConfig {
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user = User.withUsername("usuario")
-                .password("{noop}clave123")
+                .password("12345678")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user);
     }
 }
 
-@Configuration
-public class AppConfig {
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-}
